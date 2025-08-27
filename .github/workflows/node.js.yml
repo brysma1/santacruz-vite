@@ -1,0 +1,44 @@
+name: deployment workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+
+    - name: upload github pages artifact (the dist directory)
+      uses: actions/upload-pages-artifact@v4
+      with:
+        path: dist
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:            
+    - name: Deploy GitHub Pages site
+      uses: actions/deploy-pages@v4
