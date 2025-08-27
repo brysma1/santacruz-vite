@@ -1,0 +1,161 @@
+// Estilos responsive
+@media (max-width: $breakpoint-2xl) {
+  .container {
+    max-width: 1400px;
+  }
+}
+
+@media (max-width: $breakpoint-xl) {
+  .container {
+    max-width: 1200px;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .container {
+    max-width: 960px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .professors-grid,
+  .reviews-grid,
+  .stats-grid,
+  .rankings-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .container {
+    max-width: 720px;
+    padding: 0 1rem;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .professors-grid,
+  .reviews-grid,
+  .stats-grid,
+  .rankings-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .about-content,
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .container {
+    padding: 0 0.75rem;
+  }
+  
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
+  
+  .professors-section,
+  .reviews-section,
+  .stats-section,
+  .rankings-section,
+  .about-section,
+  .contact-section {
+    padding: 60px 0;
+  }
+  
+  .hero-section {
+    padding: 100px 0 60px;
+  }
+  
+  .modal-content {
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-group {
+    flex-direction: column;
+    
+    .btn {
+      border-radius: $radius-md;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+  }
+  
+  .nav-logo h2 {
+    font-size: 1.25rem;
+  }
+  
+  .nav-logo i {
+    font-size: 1.5rem;
+  }
+  
+  .professor-card,
+  .review-card,
+  .stat-card,
+  .ranking-card {
+    margin: 0 0.5rem;
+  }
+} 

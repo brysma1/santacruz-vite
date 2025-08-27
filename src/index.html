@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduRate UPB - Foro Académico Universidad Pontificia Bolivariana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles/main.scss">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#dc2626">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="EduRate UPB">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <nav class="navbar" id="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h2>EduRate UPB</h2>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#professors" class="nav-link">Profesores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#reviews" class="nav-link">Evaluaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#stats" class="nav-link">Estadísticas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#rankings" class="nav-link">Clasificaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">Acerca de</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <!-- Botones de autenticación - se actualizarán dinámicamente -->
+                    <div id="authButtons">
+                        <button class="login-btn" id="loginBtn">Iniciar Sesión</button>
+                    </div>
+                    <!-- Menú de usuario - oculto por defecto -->
+                    <div class="user-menu" id="userMenu" style="display: none;">
+                        <div class="user-avatar" id="userAvatar">
+                            <span id="userInitials">U</span>
+                        </div>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="user-info">
+                                <span id="userName">Usuario</span>
+                                <span id="userEmail">usuario@upb.edu.co</span>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                Mi Perfil
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-star"></i>
+                                Mis Evaluaciones
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Configuración
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Cerrar Sesión
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Inicio de Sesión -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content auth-modal">
+            <div class="modal-header">
+                <h3>Iniciar Sesión - UPB</h3>
+                <button class="modal-close" id="closeLoginModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="auth-form-container">
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Institucional</label>
+                        <input type="email" id="loginEmail" name="email" placeholder="tu.email@upb.edu.co" required>
+                        <div class="input-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña</label>
+                        <input type="password" id="loginPassword" name="password" placeholder="Tu contraseña" required>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <button type="button" class="password-toggle" id="loginPasswordToggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            <span class="checkmark"></span>
+                            Recordarme
+                        </label>
+                        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Iniciar Sesión
+                    </button>
+                    
+                    <div class="auth-divider">
+                        <span>o</span>
+                    </div>
+                    
+                    <button type="button" class="auth-btn google">
+                        <i class="fab fa-google"></i>
+                        Continuar con Google UPB
+                    </button>
+                    
+                    <div class="auth-switch">
+                        <p>¿No tienes cuenta? <a href="#" id="showRegister">Regístrate aquí</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content auth-modal">
+            <div class="modal-header">
+                <h3>Registro - UPB</h3>
+                <button class="modal-close" id="closeRegisterModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="auth-form-container">
+                <form class="auth-form" id="registerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="registerFirstName">Nombre</label>
+                            <input type="text" id="registerFirstName" name="firstName" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerLastName">Apellido</label>
+                            <input type="text" id="registerLastName" name="lastName" placeholder="Tu apellido" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerEmail">Email Institucional</label>
+                        <input type="email" id="registerEmail" name="email" placeholder="tu.email@upb.edu.co" required>
+                        <div class="input-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <small class="form-help">Debe ser un email válido de la UPB</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerStudentId">Código Estudiantil</label>
+                        <input type="text" id="registerStudentId" name="studentId" placeholder="ID000000000" required>
+                        <div class="input-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerFaculty">Facultad</label>
+                        <select id="registerFaculty" name="faculty" required>
+                            <option value="">Selecciona tu facultad</option>
+                            <option value="ingenieria">Ingeniería</option>
+                            <option value="medicina">Medicina</option>
+                            <option value="derecho">Derecho y Ciencias Políticas</option>
+                            <option value="administracion">Administración</option>
+                            <option value="comunicacion">Comunicación Social</option>
+                            <option value="psicologia">Psicología</option>
+                            <option value="arquitectura">Arquitectura</option>
+                            <option value="enfermeria">Enfermería</option>
+                            <option value="trabajo-social">Trabajo Social</option>
+                            <option value="teologia">Teología</option>
+                            <option value="filosofia">Filosofía</option>
+                            <option value="educacion">Educación</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña</label>
+                        <input type="password" id="registerPassword" name="password" placeholder="Mínimo 8 caracteres" required>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <button type="button" class="password-toggle" id="registerPasswordToggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="strength-bar">
+                                <div class="strength-fill"></div>
+                            </div>
+                            <span class="strength-text">Ingresa una contraseña</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Contraseña</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repite tu contraseña" required>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <button type="button" class="password-toggle" id="confirmPasswordToggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                            <span class="checkmark"></span>
+                            Acepto los <a href="#" target="_blank">Términos y Condiciones</a> y la <a href="#" target="_blank">Política de Privacidad</a>
+                        </label>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="acceptNewsletter" name="acceptNewsletter">
+                            <span class="checkmark"></span>
+                            Quiero recibir actualizaciones y noticias de EduRate UPB
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn primary">
+                        <i class="fas fa-user-plus"></i>
+                        Crear Cuenta
+                    </button>
+                    
+                    <div class="auth-divider">
+                        <span>o</span>
+                    </div>
+                    
+                    <button type="button" class="auth-btn google">
+                        <i class="fab fa-google"></i>
+                        Registrarse con Google UPB
+                    </button>
+                    
+                    <div class="auth-switch">
+                        <p>¿Ya tienes cuenta? <a href="#" id="showLogin">Inicia sesión aquí</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Búsqueda -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-content">
+            <div class="search-header">
+                <h3>Buscar Profesores UPB</h3>
+                <button class="close-search" id="closeSearch">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-form">
+                <input type="text" id="searchInput" placeholder="Buscar por nombre, materia o facultad...">
+                <div class="search-filters">
+                    <select id="facultyFilter">
+                        <option value="">Todas las facultades</option>
+                        <option value="ingenieria">Ingeniería</option>
+                        <option value="medicina">Medicina</option>
+                        <option value="derecho">Derecho</option>
+                        <option value="administracion">Administración</option>
+                        <option value="comunicacion">Comunicación</option>
+                        <option value="psicologia">Psicología</option>
+                    </select>
+                    <select id="subjectFilter">
+                        <option value="">Todas las materias</option>
+                        <option value="matematicas">Matemáticas</option>
+                        <option value="fisica">Física</option>
+                        <option value="programacion">Programación</option>
+                        <option value="derecho">Derecho</option>
+                        <option value="medicina">Medicina</option>
+                        <option value="administracion">Administración</option>
+                    </select>
+                    <select id="ratingFilter">
+                        <option value="">Todas las calificaciones</option>
+                        <option value="5">5 estrellas</option>
+                        <option value="4">4+ estrellas</option>
+                        <option value="3">3+ estrellas</option>
+                        <option value="2">2+ estrellas</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- Rotador de Banner Principal -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-slide active" data-bg="/placeholder.svg?height=600&width=1200&text=UPB+Campus+Medellin">
+                <div class="hero-content">
+                    <h1>Evalúa a los Profesores de la UPB</h1>
+                    <p>Comparte tu experiencia académica en la Universidad Pontificia Bolivariana y ayuda a otros estudiantes</p>
+                    <div class="hero-actions">
+                        <button class="cta-button primary">Explorar Profesores</button>
+                        <button class="cta-button secondary">Escribir Review</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number" data-target="847">0</span>
+                            <span class="stat-label">Profesores UPB</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-target="3492">0</span>
+                            <span class="stat-label">Reviews</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-target="12">0</span>
+                            <span class="stat-label">Facultades</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide" data-bg="/placeholder.svg?height=600&width=1200&text=Estudiantes+UPB+Evaluando">
+                <div class="hero-content">
+                    <h1>Encuentra al Profesor Perfecto en la UPB</h1>
+                    <p>Filtra por facultad, materia y calificación para encontrar la mejor experiencia educativa en Medellín</p>
+                    <div class="hero-actions">
+                        <button class="cta-button primary">Buscar Ahora</button>
+                        <button class="cta-button secondary">Ver Rankings</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide" data-bg="/placeholder.svg?height=600&width=1200&text=Comunidad+UPB+Medellin">
+                <div class="hero-content">
+                    <h1>Únete a la Comunidad UPB</h1>
+                    <p>Conecta con estudiantes bolivarianos y comparte experiencias educativas auténticas</p>
+                    <div class="hero-actions">
+                        <button class="cta-button primary">Registrarse</button>
+                        <button class="cta-button secondary">Ver Comunidad</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+        </div>
+        <button class="hero-nav prev" id="prevBtn">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="hero-nav next" id="nextBtn">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </section>
+
+    <!-- Galería de Profesores Destacados -->
+    <section id="professors" class="professors-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Profesores Destacados UPB</h2>
+                <p class="section-subtitle">Los profesores mejor calificados por la comunidad bolivariana</p>
+            </div>
+            
+            <div class="professors-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="ingenieria">Ingeniería</button>
+                <button class="filter-btn" data-filter="medicina">Medicina</button>
+                <button class="filter-btn" data-filter="derecho">Derecho</button>
+                <button class="filter-btn" data-filter="administracion">Administración</button>
+                <button class="filter-btn" data-filter="comunicacion">Comunicación</button>
+            </div>
+
+            <div class="advanced-filters" id="advancedFilters">
+                <div class="filter-group">
+                    <label>Dificultad:</label>
+                    <select id="difficultyFilter">
+                        <option value="">Todas</option>
+                        <option value="easy">Fácil</option>
+                        <option value="medium">Intermedio</option>
+                        <option value="hard">Difícil</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Semestre:</label>
+                    <select id="semesterFilter">
+                        <option value="">Todos</option>
+                        <option value="2024-1">2024-1</option>
+                        <option value="2023-2">2023-2</option>
+                        <option value="2023-1">2023-1</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Nota Promedio:</label>
+                    <select id="gradeFilter">
+                        <option value="">Todas</option>
+                        <option value="5">5.0</option>
+                        <option value="4">4.0+</option>
+                        <option value="3">3.0+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button class="reset-filters-btn" id="resetFiltersBtn">
+                        <i class="fas fa-undo"></i>
+                        Limpiar Filtros
+                    </button>
+                </div>
+            </div>
+
+            <div class="professors-grid" id="professorsGrid">
+                <!-- Las tarjetas de profesores serán generadas por JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Evaluaciones -->
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Reviews Recientes</h2>
+                <p class="section-subtitle">Experiencias reales de estudiantes bolivarianos</p>
+            </div>
+            
+            <div class="reviews-container">
+                <div class="reviews-list" id="reviewsList">
+                    <!-- Las evaluaciones serán generadas por JavaScript -->
+                    <div style="margin-bottom: 2rem; text-align: center;">
+                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/UFnEa-apVvY" title="Video complementario" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <p style="margin-top: 0.5rem; color: #374151;">Mira cómo funciona EduRate UPB y cómo puedes dejar tu review.</p>
+                    </div>
+                </div>
+                
+                <div class="reviews-sidebar">
+                    <div class="write-review-card">
+                        <h3>¿Quieres escribir una review?</h3>
+                        <p>Comparte tu experiencia en la UPB y ayuda a otros estudiantes</p>
+                        <button class="write-review-btn" id="writeReviewBtn">
+                            <i class="fas fa-pen"></i>
+                            Escribir Review
+                        </button>
+                    </div>
+                    
+                    <div class="trending-professors">
+                        <h3>Profesores Trending UPB</h3>
+                        <div class="trending-list" id="trendingList">
+                            <!-- Los profesores trending serán generados -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Estadísticas -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Estadísticas UPB</h2>
+                <p class="section-subtitle">Datos en tiempo real de nuestra comunidad bolivariana</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" data-target="847">0</h3>
+                        <p class="stat-label">Profesores UPB</p>
+                        <span class="stat-change positive">+8% este semestre</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" data-target="3492">0</h3>
+                        <p class="stat-label">Reviews Publicadas</p>
+                        <span class="stat-change positive">+12% este mes</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" data-target="12">0</h3>
+                        <p class="stat-label">Facultades</p>
+                        <span class="stat-change positive">Todas activas</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number" data-target="15234">0</h3>
+                        <p class="stat-label">Estudiantes Activos</p>
+                        <span class="stat-change positive">+18% este semestre</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3>Distribución de Calificaciones</h3>
+                    <div class="rating-distribution">
+                        <div class="rating-bar">
+                            <span class="rating-label">5 ⭐</span>
+                            <div class="bar-container">
+                                <div class="bar" data-percentage="42"></div>
+                            </div>
+                            <span class="rating-percentage">42%</span>
+                        </div>
+                        <div class="rating-bar">
+                            <span class="rating-label">4 ⭐</span>
+                            <div class="bar-container">
+                                <div class="bar" data-percentage="35"></div>
+                            </div>
+                            <span class="rating-percentage">35%</span>
+                        </div>
+                        <div class="rating-bar">
+                            <span class="rating-label">3 ⭐</span>
+                            <div class="bar-container">
+                                <div class="bar" data-percentage="16"></div>
+                            </div>
+                            <span class="rating-percentage">16%</span>
+                        </div>
+                        <div class="rating-bar">
+                            <span class="rating-label">2 ⭐</span>
+                            <div class="bar-container">
+                                <div class="bar" data-percentage="5"></div>
+                            </div>
+                            <span class="rating-percentage">5%</span>
+                        </div>
+                        <div class="rating-bar">
+                            <span class="rating-label">1 ⭐</span>
+                            <div class="bar-container">
+                                <div class="bar" data-percentage="2"></div>
+                            </div>
+                            <span class="rating-percentage">2%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>Facultades Más Evaluadas</h3>
+                    <div class="subjects-chart">
+                        <div class="subject-item">
+                            <span class="subject-name">Ingeniería</span>
+                            <div class="subject-bar">
+                                <div class="subject-fill" data-percentage="32"></div>
+                            </div>
+                            <span class="subject-count">1,118 reviews</span>
+                        </div>
+                        <div class="subject-item">
+                            <span class="subject-name">Medicina</span>
+                            <div class="subject-bar">
+                                <div class="subject-fill" data-percentage="24"></div>
+                            </div>
+                            <span class="subject-count">838 reviews</span>
+                        </div>
+                        <div class="subject-item">
+                            <span class="subject-name">Administración</span>
+                            <div class="subject-bar">
+                                <div class="subject-fill" data-percentage="18"></div>
+                            </div>
+                            <span class="subject-count">629 reviews</span>
+                        </div>
+                        <div class="subject-item">
+                            <span class="subject-name">Derecho</span>
+                            <div class="subject-bar">
+                                <div class="subject-fill" data-percentage="15"></div>
+                            </div>
+                            <span class="subject-count">524 reviews</span>
+                        </div>
+                        <div class="subject-item">
+                            <span class="subject-name">Comunicación</span>
+                            <div class="subject-bar">
+                                <div class="subject-fill" data-percentage="11"></div>
+                            </div>
+                            <span class="subject-count">384 reviews</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Clasificaciones -->
+    <section id="rankings" class="rankings-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Rankings UPB</h2>
+            <p class="section-subtitle">Los mejores profesores por categoría</p>
+        </div>
+        
+        <div class="rankings-tabs">
+            <button class="ranking-tab active" data-tab="overall">General</button>
+            <button class="ranking-tab" data-tab="faculty">Por Facultad</button>
+            <button class="ranking-tab" data-tab="difficulty">Dificultad</button>
+            <button class="ranking-tab" data-tab="trending">Trending</button>
+        </div>
+        
+        <div class="rankings-content" id="rankingsContent">
+            <!-- Las clasificaciones serán generadas por JavaScript -->
+        </div>
+    </div>
+</section>
+
+    <!-- Sección de Materias Populares -->
+    <section id="subjects" class="subjects-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Materias Populares UPB</h2>
+            <p class="section-subtitle">Las materias más evaluadas por estudiantes</p>
+        </div>
+        
+        <div class="subjects-grid" id="subjectsGrid">
+            <!-- Las materias serán generadas por JavaScript -->
+        </div>
+    </div>
+</section>
+
+    <!-- Sección de Testimonios -->
+    <section id="testimonials" class="testimonials-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Testimonios Estudiantes UPB</h2>
+            <p class="section-subtitle">Lo que dicen nuestros usuarios sobre la plataforma</p>
+        </div>
+        
+        <div class="testimonials-slider" id="testimonialsSlider">
+            <!-- Los testimonios serán generados por JavaScript -->
+        </div>
+    </div>
+</section>
+
+    <!-- Sección de Consejos Académicos -->
+    <section id="tips" class="tips-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Consejos Académicos UPB</h2>
+            <p class="section-subtitle">Tips para tener éxito en la Universidad Pontificia Bolivariana</p>
+        </div>
+        
+        <div class="tips-grid" id="tipsGrid">
+            <!-- Los consejos serán generados por JavaScript -->
+        </div>
+    </div>
+</section>
+
+    <!-- Widget Meteorológico -->
+    <div class="weather-widget" id="weatherWidget">
+        <h4>Campus UPB Medellín</h4>
+        <div class="weather-info">
+            <div class="temperature">24°C</div>
+            <div class="condition">
+                <i class="fas fa-sun"></i>
+                <span>Soleado</span>
+            </div>
+        </div>
+        <div class="online-counter">
+            <i class="fas fa-circle online"></i>
+            <span id="onlineCount">1,247 estudiantes conectados</span>
+        </div>
+    </div>
+
+    <!-- Toast de Logro -->
+    <div class="achievement-toast" id="achievementToast">
+        <div class="achievement-icon">
+            <i class="fas fa-trophy"></i>
+        </div>
+        <div class="achievement-content">
+            <div class="achievement-title">¡Logro Desbloqueado!</div>
+            <div class="achievement-description" id="achievementDescription"></div>
+        </div>
+    </div>
+
+    <!-- Sección Acerca de con Video -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Sobre EduRate UPB</h2>
+                    <p class="about-description">
+                        EduRate UPB nació para crear transparencia en la experiencia educativa de la Universidad Pontificia Bolivariana. 
+                        Somos una plataforma donde los estudiantes bolivarianos pueden compartir experiencias reales 
+                        sobre sus profesores, ayudando a crear una comunidad académica más informada en Medellín.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Reviews Verificadas</h4>
+                                <p>Todas las reviews son verificadas por estudiantes UPB activos</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users-cog"></i>
+                            <div>
+                                <h4>Comunidad Bolivariana</h4>
+                                <p>Miles de estudiantes UPB comparten experiencias diariamente</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <h4>Datos Precisos</h4>
+                                <p>Estadísticas detalladas para tomar mejores decisiones académicas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-video">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/UFnEa-apVvY" 
+                            title="EduRate UPB - Cómo funciona nuestra plataforma" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="video-caption">Descubre cómo EduRate UPB está mejorando la experiencia educativa bolivariana</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contáctanos</h2>
+                <p class="section-subtitle">¿Tienes preguntas sobre EduRate UPB? Nos encantaría escucharte</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>contacto@edurate-upb.com</p>
+                            <p>soporte@edurate-upb.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Teléfono</h4>
+                            <p>+57 (4) 448-8388</p>
+                            <p>Lun - Vie: 8:00 - 17:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Ubicación</h4>
+                            <p>Medellín, Antioquia</p>
+                            <p>Campus UPB Laureles</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <h4>Síguenos</h4>
+                        <div class="social-icons">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Nombre</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Apellido</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Institucional</label>
+                        <input type="email" id="email" name="email" placeholder="tu.email@upb.edu.co" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="faculty">Facultad</label>
+                        <select id="faculty" name="faculty">
+                            <option value="">Selecciona tu facultad</option>
+                            <option value="ingenieria">Ingeniería</option>
+                            <option value="medicina">Medicina</option>
+                            <option value="derecho">Derecho y Ciencias Políticas</option>
+                            <option value="administracion">Administración</option>
+                            <option value="comunicacion">Comunicación Social</option>
+                            <option value="psicologia">Psicología</option>
+                            <option value="arquitectura">Arquitectura</option>
+                            <option value="enfermeria">Enfermería</option>
+                            <option value="trabajo-social">Trabajo Social</option>
+                            <option value="teologia">Teología</option>
+                            <option value="filosofia">Filosofía</option>
+                            <option value="educacion">Educación</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Asunto</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Selecciona un asunto</option>
+                            <option value="general">Consulta General</option>
+                            <option value="technical">Soporte Técnico</option>
+                            <option value="report">Reportar Contenido</option>
+                            <option value="professor">Agregar Profesor</option>
+                            <option value="other">Otro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Cuéntanos cómo podemos ayudarte con EduRate UPB..."></textarea>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <span class="checkmark"></span>
+                            Quiero recibir actualizaciones de EduRate UPB
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>EduRate UPB</h3>
+                    </div>
+                    <p>La plataforma líder para evaluar profesores de la Universidad Pontificia Bolivariana en Medellín, Colombia.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Plataforma</h4>
+                    <ul>
+                        <li><a href="#professors">Buscar Profesores</a></li>
+                        <li><a href="#reviews">Escribir Review</a></li>
+                        <li><a href="#stats">Estadísticas</a></li>
+                        <li><a href="#">Rankings UPB</a></li>
+                        <li><a href="#">API</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Comunidad UPB</h4>
+                    <ul>
+                        <li><a href="#">Guías Académicas</a></li>
+                        <li><a href="#">Blog UPB</a></li>
+                        <li><a href="#">Eventos</a></li>
+                        <li><a href="#">Embajadores</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#contact">Contacto</a></li>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Reportar Problema</a></li>
+                        <li><a href="#">Términos de Uso</a></li>
+                        <li><a href="#">Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 EduRate UPB. Todos los derechos reservados. Medellín, Colombia.</p>
+                    <div class="footer-links">
+                        <a href="#">Términos</a>
+                        <a href="#">Privacidad</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón de Acción Flotante -->
+    <div class="floating-actions">
+        <button class="floating-btn main-fab" id="mainFab" title="Acciones rápidas">
+            <i class="fas fa-plus"></i>
+        </button>
+        <div class="fab-menu" id="fabMenu">
+            <button class="floating-btn" id="writeReviewFab" title="Escribir review">
+                <i class="fas fa-pen"></i>
+            </button>
+            <button class="floating-btn" id="searchFab" title="Buscar profesor">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="floating-btn" id="scrollTopFab" title="Ir arriba">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Evaluación -->
+    <div class="modal" id="reviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Escribir Review - UPB</h3>
+                <button class="modal-close" id="closeReviewModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="review-form" id="reviewForm">
+                <div class="form-group">
+                    <label for="professorSelect">Profesor UPB</label>
+                    <select id="professorSelect" name="professor" required>
+                        <option value="">Selecciona un profesor</option>
+                        <!-- Las opciones serán pobladas por JavaScript -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Calificación General</label>
+                    <div class="star-rating" id="overallRating">
+                        <i class="fas fa-star" data-rating="1"></i>
+                        <i class="fas fa-star" data-rating="2"></i>
+                        <i class="fas fa-star" data-rating="3"></i>
+                        <i class="fas fa-star" data-rating="4"></i>
+                        <i class="fas fa-star" data-rating="5"></i>
+                    </div>
+                </div>
+                
+                <div class="rating-categories">
+                    <div class="rating-category">
+                        <label>Claridad en la Enseñanza</label>
+                        <div class="star-rating" data-category="clarity">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-category">
+                        <label>Disponibilidad</label>
+                        <div class="star-rating" data-category="availability">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-category">
+                        <label>Dificultad del Curso</label>
+                        <div class="star-rating" data-category="difficulty">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewText">Tu Review (Markdown soportado)</label>
+                    <div class="markdown-editor">
+                        <div class="editor-toolbar">
+                            <button type="button" class="editor-btn" data-action="bold" title="Negrita">
+                                <i class="fas fa-bold"></i>
+                            </button>
+                            <button type="button" class="editor-btn" data-action="italic" title="Cursiva">
+                                <i class="fas fa-italic"></i>
+                            </button>
+                            <button type="button" class="editor-btn" data-action="heading" title="Encabezado">
+                                <i class="fas fa-heading"></i>
+                            </button>
+                            <button type="button" class="editor-btn" data-action="list" title="Lista">
+                                <i class="fas fa-list"></i>
+                            </button>
+                            <button type="button" class="editor-btn" data-action="link" title="Enlace">
+                                <i class="fas fa-link"></i>
+                            </button>
+                            <button type="button" class="editor-btn" data-action="preview" title="Vista previa">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <textarea id="reviewText" name="reviewText" rows="8" 
+                                placeholder="Escribe tu review aquí... Puedes usar Markdown para formatear tu texto.
+
+Ejemplo:
+**Excelente profesor UPB** - Muy claro en sus explicaciones
+- Siempre disponible para dudas
+- Exámenes justos
+- Material actualizado
+
+### Lo que más me gustó:
+El profesor siempre se asegura de que todos entiendan antes de continuar."></textarea>
+                        <div class="markdown-preview" id="markdownPreview" style="display: none;"></div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="semester">Semestre Cursado</label>
+                        <select id="semester" name="semester">
+                            <option value="">Selecciona</option>
+                            <option value="2024-1">2024-1</option>
+                            <option value="2023-2">2023-2</option>
+                            <option value="2023-1">2023-1</option>
+                            <option value="2022-2">2022-2</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="grade">Nota Obtenida</label>
+                        <select id="grade" name="grade">
+                            <option value="">Opcional</option>
+                            <option value="5.0">5.0</option>
+                            <option value="4.5">4.5</option>
+                            <option value="4.0">4.0</option>
+                            <option value="3.5">3.5</option>
+                            <option value="3.0">3.0</option>
+                            <option value="2.5">2.5</option>
+                            <option value="2.0">2.0</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="anonymous" name="anonymous">
+                        <span class="checkmark"></span>
+                        Publicar de forma anónima
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelReview">Cancelar</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Publicar Review
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Detalle del Profesor -->
+    <div class="modal" id="professorModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="professorModalTitle">Detalles del Profesor</h3>
+                <button class="modal-close" id="closeProfessorModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="professor-detail" id="professorDetail">
+                <!-- Los detalles del profesor serán poblados por JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificaciones Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="./js/main.ts"></script>
+</body>
+</html>

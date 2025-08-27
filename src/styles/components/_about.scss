@@ -1,0 +1,64 @@
+// Estilos para la sección about
+.about-section {
+  padding: 80px 0;
+  background: var(--bg-primary);
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.about-text {
+  h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+  
+  p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  
+  span {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+}
+
+.about-image {
+  text-align: center;
+  
+  img {
+    max-width: 100%;
+    border-radius: $radius-lg;
+    box-shadow: var(--shadow-lg);
+  }
+} 

@@ -1,0 +1,116 @@
+// Estilos para la sección de profesores
+.professors-section {
+  padding: 80px 0;
+  background: var(--bg-primary);
+}
+
+.professors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.professor-card {
+  background: white;
+  border-radius: $radius-lg;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: var(--transition);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+.professor-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.professor-content {
+  padding: 1.5rem;
+}
+
+.professor-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.professor-title {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.professor-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.rating-stars {
+  color: #fbbf24;
+}
+
+.rating-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.professor-subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.subject-tag {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.75rem;
+  border-radius: $radius-sm;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.professor-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-view {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: $radius-sm;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--transition);
+  
+  &:hover {
+    background: var(--primary-dark);
+  }
+}
+
+.btn-review {
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: $radius-sm;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--transition);
+  
+  &:hover {
+    background: var(--primary-color);
+    color: white;
+  }
+} 
